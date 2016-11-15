@@ -47,3 +47,30 @@ void Account::setAccID(int newID)
 {
 	ID = newID;
 }
+
+double Account::interest(double balance, double rate)
+{
+	double interest;
+
+	if (balance <= 0)
+	{
+		interest = 0;
+	}
+	else
+	{
+		interest = balance * rate;
+	}
+	return interest;
+}
+
+bool Account::loan(double balance, double borrow)
+{
+	if (borrow <= (balance * 2))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

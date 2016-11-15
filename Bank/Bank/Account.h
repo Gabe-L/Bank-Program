@@ -21,5 +21,7 @@ public:
 	void withdrawal(double withdraw);
 	void withdrawal();
 	void setAccID(int newID);
+	double interest(double balance, double rate);
+	bool loan(double balance, double borrow);
 };
 
