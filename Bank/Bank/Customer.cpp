@@ -16,12 +16,7 @@ string Customer::getName()
 	return name;
 }
 
-void Customer::setCust(string newName)
+void Customer::setName(string newName)
 {
 	name = newName;
-}
-
-void Customer::setCust(int newID)
-{
-	ID = newID;
 }

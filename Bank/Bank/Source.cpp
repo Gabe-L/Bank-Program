@@ -9,6 +9,7 @@ void main()
 {
 	int response, customerNo;
 	string newName, newNameAppend;
+	double withdraw;
 
 	Calculations calc[10000];
 	Account acc[10000];
@@ -16,17 +17,17 @@ void main()
 
 	//hard coded test data
 
-	acc[2561].setAcc(3561.25);
-	acc[2561].setAcc(1234);
-	cust[2561].setCust("Joe Kappa");
+	acc[2561].setBalance(3561.25);
+	acc[2561].setPin(1234);
+	cust[2561].setName("Joe Kappa");
 
-	acc[3241].setAcc(200.57);
-	acc[3241].setAcc(1234);
-	cust[3241].setCust("Dave Johns");
+	acc[3241].setBalance(200.57);
+	acc[3241].setPin(1234);
+	cust[3241].setName("Dave Johns");
 
-	acc[8902].setAcc(1000.56);
-	acc[8902].setAcc(1234);
-	cust[8902].setCust("Jodh Doe");
+	acc[8902].setBalance(1000.56);
+	acc[8902].setPin(1234);
+	cust[8902].setName("Jodh Doe");
 
 
 	do
@@ -45,16 +46,16 @@ void main()
 			{
 				if (cust[i].getName() == "")
 				{
-					cust[i].setCust(newNameAppend);
-					cust[i].setCust(i);
+					cust[i].setName(newNameAppend);
+					acc[i].setAccID(i);
 					customerNo = i;
 					break;
 				}
 			}
-			acc[customerNo].setAcc(0);
+			acc[customerNo].setPin(0);
 			cout << "Enter new pin..." << endl;
 			cin >> response;
-			acc[customerNo].setAcc(response);
+			acc[customerNo].setPin(response);
 			cout << endl << "Account has been set up for " << cust[customerNo].getName() << ", the customer's personal ID is " << customerNo << endl << endl;
 		}
 		cout << "Please enter your PIN..." << endl;
@@ -80,11 +81,13 @@ void main()
 				switch (response)
 				{
 				case 1:
-					acc[customerNo].withdrawal();
+					cout << "How much is being withdrawn?" << endl;
+					cin >> withdraw;
+					acc[customerNo].withdrawal(withdraw);
 					cout << "New balance is " << acc[customerNo].getBalance() << endl << endl;
 					break;
 				case 2:
-					acc[customerNo].setAcc(calc[customerNo].deposit(acc[customerNo].getBalance()));
+					acc[customerNo].setBalance(calc[customerNo].deposit(acc[customerNo].getBalance()));
 					cout << "New balance is " << acc[customerNo].getBalance() << endl << endl;
 					break;
 				case 3:

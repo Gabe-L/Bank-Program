@@ -18,7 +18,7 @@ double Account::getBalance()
 	return balance;
 }
 
-void Account::setAcc(double amount)
+void Account::setBalance(double amount)
 {
 	balance = amount;
 }
@@ -28,26 +28,22 @@ int Account::getPin()
 	return pin;
 }
 
-void Account::setAcc(int newPin)
+void Account::setPin(int newPin)
 {
 	pin = newPin;
 }
 
-string Account::getAccName()
+void Account::withdrawal(double withdraw)
 {
-	return accName;
-}
-
-void Account::setAcc(string newName)
-{
-	accName = newName;
+	balance -= withdraw;
 }
 
 void Account::withdrawal()
 {
-	double withdraw;
-	cout << "How much is being withdrawn?" << endl;
-	cin >> withdraw;
-	balance -= withdraw;
-	//return *balance;
+	balance -= 10;
+}
+
+void Account::setAccID(int newID)
+{
+	ID = newID;
 }

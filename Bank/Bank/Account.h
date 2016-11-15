@@ -6,20 +6,20 @@ using namespace std;
 class Account
 {
 private:
+	int ID;
 	double balance;
 	int pin;
-	string accName;
 
 public:
 	Account();
 	~Account();
 
 	double getBalance();
-	void setAcc(double amount);
+	void setBalance(double amount);
 	int getPin();
-	void setAcc(int newPin);
-	string getAccName();
-	void setAcc(string newName);
+	void setPin(int newPin);
+	void withdrawal(double withdraw);
 	void withdrawal();
+	void setAccID(int newID);
 };
 
