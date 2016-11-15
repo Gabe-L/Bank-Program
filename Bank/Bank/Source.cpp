@@ -7,7 +7,7 @@ using namespace std;
 
 void main()
 {
-	int response, customerNo;
+	int response, customerNo, custID;
 	string newName, newNameAppend;
 	double withdraw, borrow, interest = 0.0025;
 
@@ -33,7 +33,7 @@ void main()
 
 	do
 	{
-		cout << "Enter the customer ID or -1 to add a new customer..." << endl;
+		cout << "Enter the account ID or -1 to add a new customer..." << endl;
 		cin >> customerNo;
 		if (customerNo == -1)
 		{
@@ -43,12 +43,12 @@ void main()
 			getline(cin, newName);
 			newNameAppend.append(newName);
 
-			for (int i = 0; i <= 10000; i++)
+			for (int i = 0; i <= 10000; i+=5)
 			{
 				if (cust[i].getName() == "")
 				{
 					cust[i].setName(newNameAppend);
-					acc[i].setAccID(i);
+					cust[i].setID(i);
 					customerNo = i;
 					break;
 				}
@@ -57,10 +57,11 @@ void main()
 			cout << "Enter new pin..." << endl;
 			cin >> response;
 			acc[customerNo].setPin(response);
-			cout << endl << "Account has been set up for " << cust[customerNo].getName() << ", the customer's personal ID is " << customerNo << endl << endl;
+			cout << endl << "Account has been set up for " << cust[customerNo].getName() << ", the account's ID is " << customerNo << endl << endl;
 		}
 		cout << "Please enter your PIN..." << endl;
 		cin >> response;
+		cout << endl;
 		if (response != acc[customerNo].getPin())
 		{
 			cout << "Pin incorrect." << endl;
@@ -69,6 +70,7 @@ void main()
 		{
 			do
 			{
+				cout << "Customer name: " << cust[customerNo].getName() << "   Account ID: " << customerNo << endl << endl;
 				cout << "What function would you like to perform? (Enter a number)" << endl;
 				cout << "1. Withdraw from account..." << endl;
 				cout << "2. Quick withdraw..." << endl;
@@ -76,11 +78,13 @@ void main()
 				cout << "4. Display balance..." << endl;
 				cout << "5. Calculate interest..." << endl;
 				cout << "6. Check loan eligibility..." << endl;
-				cout << "7. Enter Other ID..." << endl;
-				cout << "8. Quit..." << endl << endl;
+				cout << "7. Create account under this name..." << endl;
+				cout << "8. Enter Other ID..." << endl;
+				cout << "9. Quit..." << endl << endl;
+
 
 				cin >> response;
-				cout << endl;
+				system("cls");
 
 				switch (response)
 				{
@@ -102,21 +106,44 @@ void main()
 					cout << "Balance is: " << acc[customerNo].getBalance() << endl << endl;
 					break;
 				case 5:
-					cout << "Annual interest gained is " << acc[customerNo].interest(acc[customerNo].getBalance(), interest) << endl;
+					cout << "Annual interest gained is " << acc[customerNo].interest(acc[customerNo].getBalance(), interest) << endl << endl;
 					break;
 				case 6:
 					cout << "Enter amount to be borrowed..." << endl;
 					cin >> borrow;
 					if (acc[customerNo].loan(acc[customerNo].getBalance(), borrow))
 					{
-						cout << "Loan approved." << endl;
+						cout << "Loan approved." << endl << endl;
 					}
 					else
 					{
-						cout << "Loan not approved, maximum loan avaiable is " << ((acc[customerNo].getBalance())*2);
+						cout << "Loan not approved, maximum loan avaiable is " << ((acc[customerNo].getBalance())*2) << endl << endl;
+					}
+				case 7:
+					custID = cust[customerNo].getID();
+					for (int i = 0; i <= 4; i++)
+					{
+						cout << custID + 4 << endl;
+						if ((cust[custID+i].getName() == "") && (i <= 4))
+						{
+							cust[custID+i].setName(cust[customerNo].getName());
+							cust[custID + i].setID(custID + i);
+							customerNo = custID+i;
+							acc[customerNo].setPin(0);
+							cout << "Enter new pin..." << endl;
+							cin >> response;
+							acc[customerNo].setPin(response);
+							cout << endl << "New account has been set up for " << cust[customerNo].getName() << ", the account's ID is " << customerNo << endl << endl;
+							break;
+						}
+						else if (i >= 4)
+						{
+							cout << "Customer has reached maximum number of accounts, a new account cannot be created." << endl << endl;
+							break;
+						}
 					}
 				}
-			} while (response < 7);
+			} while (response < 8);
 		}
-	} while (response < 8);
+	} while (response < 9);
 }

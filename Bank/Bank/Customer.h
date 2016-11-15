@@ -7,6 +7,7 @@ class Customer
 {
 private:
 	string name;
+	int ID;
 
 public:
 	Customer();
@@ -14,6 +15,7 @@ public:
 
 	string getName();
 	void setName(string newName);
-
+	void setID(int newID);
+	int getID();
 };
 

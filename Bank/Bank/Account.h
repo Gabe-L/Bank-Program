@@ -6,7 +6,6 @@ using namespace std;
 class Account
 {
 private:
-	int ID;
 	double balance;
 	int pin;
 
@@ -20,7 +19,6 @@ public:
 	void setPin(int newPin);
 	void withdrawal(double withdraw);
 	void withdrawal();
-	void setAccID(int newID);
 	double interest(double balance, double rate);
 	bool loan(double balance, double borrow);
 };

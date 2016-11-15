@@ -20,3 +20,13 @@ void Customer::setName(string newName)
 {
 	name = newName;
 }
+
+void Customer::setID(int newID)
+{
+	ID = newID;
+}
+
+int Customer::getID()
+{
+	return ID;
+}

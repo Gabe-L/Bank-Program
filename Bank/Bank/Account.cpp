@@ -43,11 +43,6 @@ void Account::withdrawal()
 	balance -= 10;
 }
 
-void Account::setAccID(int newID)
-{
-	ID = newID;
-}
-
 double Account::interest(double balance, double rate)
 {
 	double interest;
