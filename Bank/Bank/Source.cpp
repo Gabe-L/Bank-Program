@@ -9,7 +9,7 @@ void main()
 {
 	int response, customerNo, custID;
 	string newName, newNameAppend;
-	double withdraw, borrow, interest = 0.0025;
+	double withdraw, borrow, interest = 0.0025, overdraw;
 
 	Calculations calc[10000];
 	Account acc[10000];
@@ -71,8 +71,9 @@ void main()
 				cout << "5. Calculate interest..." << endl;
 				cout << "6. Check loan eligibility..." << endl;
 				cout << "7. Create account under this name..." << endl;
-				cout << "8. Enter Other ID..." << endl;
-				cout << "9. Quit..." << endl << endl;
+				cout << "8. Increase overdraft..." << endl;
+				cout << "9. Enter Other ID..." << endl;
+				cout << "10. Quit..." << endl << endl;
 
 
 				cin >> response;
@@ -111,6 +112,7 @@ void main()
 					{
 						cout << "Loan not approved, maximum loan avaiable is " << ((acc[customerNo].getBalance())*2) << endl << endl;
 					}
+					break;
 				case 7:
 					for (int i = 0; i <= 4; i++)
 					{
@@ -130,8 +132,15 @@ void main()
 						}
 					}
 					response = 7;
+					break;
+				case 8:
+					cout << "The current approved overdraft is " << acc[customerNo].getOverdraft() << ". Enter the amount to change the overdraft by..." << endl << endl;
+					cin >> overdraw;
+					acc[customerNo].setOverdraft((acc[customerNo].getOverdraft()+overdraw));
+					cout << "The overdraft limit is now " << acc[customerNo].getOverdraft() << endl << endl;
+					break;
 				}
-			} while (response < 8);
+			} while (response < 9);
 		}
-	} while (response < 9);
+	} while (response < 10);
 }

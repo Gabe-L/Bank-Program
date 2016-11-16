@@ -6,6 +6,7 @@
 Account::Account()
 {
 	balance = 10;
+	overdraft = 0;
 }
 
 
@@ -35,12 +36,26 @@ void Account::setPin(int newPin)
 
 void Account::withdrawal(double withdraw)
 {
-	balance -= withdraw;
+	if (withdraw > (balance + overdraft))
+	{
+		cout << "Cannot withdraw that much." << endl;
+	}
+	else
+	{
+		balance -= withdraw;
+	}
 }
 
 void Account::withdrawal()
 {
-	balance -= 10;
+	if (10 > (balance + overdraft))
+	{
+		cout << "Cannot withdraw that much." << endl;
+	}
+	else
+	{
+		balance -= 10;
+	}
 }
 
 double Account::interest(double balance, double rate)
@@ -68,4 +83,14 @@ bool Account::loan(double balance, double borrow)
 	{
 		return false;
 	}
+}
+
+double Account::getOverdraft()
+{
+	return overdraft;
+}
+
+void Account::setOverdraft(double amount)
+{
+	overdraft = amount;
 }

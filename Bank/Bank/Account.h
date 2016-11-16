@@ -1,5 +1,4 @@
 #pragma once
-#include<string>
 
 using namespace std;
 
@@ -8,6 +7,7 @@ class Account
 private:
 	double balance;
 	int pin;
+	double overdraft;
 
 public:
 	Account();
@@ -21,5 +21,7 @@ public:
 	void withdrawal();
 	double interest(double balance, double rate);
 	bool loan(double balance, double borrow);
+	double getOverdraft();
+	void setOverdraft(double amount);
 };
 
