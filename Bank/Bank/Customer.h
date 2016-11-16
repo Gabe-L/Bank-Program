@@ -14,7 +14,8 @@ public:
 	~Customer();
 
 	string getName();
-	void setName(string newName);
+	int setName(int i);
+	int setName(int i, string newName);
 	void setID(int newID);
 	int getID();
 };

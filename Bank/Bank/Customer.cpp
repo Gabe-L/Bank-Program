@@ -1,4 +1,5 @@
 #include "Customer.h"
+#include<iostream>
 
 
 
@@ -16,9 +17,29 @@ string Customer::getName()
 	return name;
 }
 
-void Customer::setName(string newName)
+int Customer::setName(int i, string newName)
 {
 	name = newName;
+	setID(i);
+
+	return i;
+}
+
+int Customer::setName(int i)
+{
+	string newNameAppend;
+	string newName;
+
+	cout << "What is the customer's name?" << endl;
+
+	cin >> newNameAppend;
+	getline(cin, newName);
+	newNameAppend.append(newName);
+
+	name = newNameAppend;
+	setID(i);
+
+	return i;
 }
 
 void Customer::setID(int newID)

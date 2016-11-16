@@ -17,17 +17,17 @@ void main()
 
 	//hard coded test data -----------------------------------
 
-	acc[2561].setBalance(3561.25);
-	acc[2561].setPin(1234);
-	cust[2561].setName("Joe Kappa");
+	acc[0].setBalance(3561.25);
+	acc[0].setPin(1234);
+	cust[0].setName(0);
 
-	acc[3241].setBalance(200.57);
-	acc[3241].setPin(1234);
-	cust[3241].setName("Dave Johns");
+	acc[5].setBalance(200.57);
+	acc[5].setPin(1234);
+	cust[5].setName(5);
 
-	acc[8902].setBalance(1000.56);
-	acc[8902].setPin(1234);
-	cust[8902].setName("Jodh Doe");
+	acc[10].setBalance(1000.56);
+	acc[10].setPin(1234);
+	cust[10].setName(10);
 
 	//--------------------------------------------------------
 
@@ -37,27 +37,19 @@ void main()
 		cin >> customerNo;
 		if (customerNo == -1)
 		{
-			cout << "What is the customer's name?" << endl;
-
-			cin>>newNameAppend;
-			getline(cin, newName);
-			newNameAppend.append(newName);
-
 			for (int i = 0; i <= 10000; i+=5)
 			{
 				if (cust[i].getName() == "")
 				{
-					cust[i].setName(newNameAppend);
-					cust[i].setID(i);
-					customerNo = i;
+					customerNo = cust[i].setName(i);
+					acc[customerNo].setPin(0);
+					cout << "Enter new pin..." << endl;
+					cin >> response;
+					acc[customerNo].setPin(response);
+					cout << endl << "Account has been set up for " << cust[customerNo].getName() << ", the account's ID is " << customerNo << endl << endl;
 					break;
 				}
 			}
-			acc[customerNo].setPin(0);
-			cout << "Enter new pin..." << endl;
-			cin >> response;
-			acc[customerNo].setPin(response);
-			cout << endl << "Account has been set up for " << cust[customerNo].getName() << ", the account's ID is " << customerNo << endl << endl;
 		}
 		cout << "Please enter your PIN..." << endl;
 		cin >> response;
@@ -120,15 +112,11 @@ void main()
 						cout << "Loan not approved, maximum loan avaiable is " << ((acc[customerNo].getBalance())*2) << endl << endl;
 					}
 				case 7:
-					custID = cust[customerNo].getID();
 					for (int i = 0; i <= 4; i++)
 					{
-						cout << custID + 4 << endl;
-						if ((cust[custID+i].getName() == "") && (i <= 4))
+						if (cust[customerNo + i].getName() == "")
 						{
-							cust[custID+i].setName(cust[customerNo].getName());
-							cust[custID + i].setID(custID + i);
-							customerNo = custID+i;
+							customerNo = cust[customerNo + i].setName(customerNo + i, cust[customerNo].getName());
 							acc[customerNo].setPin(0);
 							cout << "Enter new pin..." << endl;
 							cin >> response;
@@ -136,12 +124,12 @@ void main()
 							cout << endl << "New account has been set up for " << cust[customerNo].getName() << ", the account's ID is " << customerNo << endl << endl;
 							break;
 						}
-						else if (i >= 4)
+						else if (i == 4)
 						{
-							cout << "Customer has reached maximum number of accounts, a new account cannot be created." << endl << endl;
-							break;
+							cout << "This customer has reached the maximum number of accounts.";
 						}
 					}
+					response = 7;
 				}
 			} while (response < 8);
 		}
