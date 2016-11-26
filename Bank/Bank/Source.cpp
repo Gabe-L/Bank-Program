@@ -9,7 +9,8 @@ void main()
 {
 	int response, customerNo, custID;
 	string newName, newNameAppend;
-	double withdraw, borrow, interest = 0.0025, overdraw;
+	double withdraw, borrow, overdraw;
+	const double interest = 0.025;
 
 	Calculations calc[10000];
 	Account acc[10000];
