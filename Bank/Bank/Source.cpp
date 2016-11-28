@@ -8,7 +8,7 @@ using namespace std;
 void main()
 {
 	int response, customerNo, custID;
-	string newName, newNameAppend;
+	string newName, newNameAppend, custName;
 	double withdraw, borrow, overdraw;
 	const double interest = 0.025;
 
@@ -115,21 +115,31 @@ void main()
 					}
 					break;
 				case 7:
-					for (int i = 0; i <= 4; i++)
+					if ((customerNo % 10) >= 5)
 					{
-						if (cust[customerNo + i].getName() == "")
+						customerNo -= ((customerNo % 10) - 5);
+					}
+					else if ((customerNo % 10) > 0)
+					{
+						customerNo -= customerNo % 10;
+					}
+					cout << customerNo << endl;
+					for (int i = customerNo; i < customerNo + 5; i++)
+					{
+						if (cust[i].getName() == "")
 						{
-							customerNo = cust[customerNo + i].setName(customerNo + i, cust[customerNo].getName());
-							acc[customerNo].setPin(0);
+							customerNo = cust[i].setName(i, cust[customerNo].getName());
+							acc[i].setPin(0);
 							cout << "Enter new pin..." << endl;
 							cin >> response;
-							acc[customerNo].setPin(response);
-							cout << endl << "New account has been set up for " << cust[customerNo].getName() << ", the account's ID is " << customerNo << endl << endl;
+							acc[i].setPin(response);
+							cout << endl << "Account has been set up for " << cust[i].getName() << ", the account's ID is " << i << endl << endl;
 							break;
 						}
-						else if (i == 4)
+						else if (i == customerNo + 4)
 						{
-							cout << "This customer has reached the maximum number of accounts.";
+							cout << "Max accounts exceeded..." << endl;
+							break;
 						}
 					}
 					response = 7;

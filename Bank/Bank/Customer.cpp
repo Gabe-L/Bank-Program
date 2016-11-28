@@ -5,6 +5,7 @@
 
 Customer::Customer()
 {
+	name = "";
 }
 
 
